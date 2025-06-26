@@ -7,12 +7,34 @@
 <body>
 <h1>Awesome 계산기</h1>
 
-<form th:action="@{/calculate}" method="post">
+<form th:action="@{/calculator}" method="post">
     <label for="num1">Number 1:</label>
-    <input type="number" step="any" id="num1" name="num1" required />
+    <input type="number" step="any" id="num1" name="num1" required/>
+
+    <label for="num2">Number 2:</label>
+    <input type="number" step="any" id="num2" name="num2" required/>
+
+    <label for="operation">Operation:</label>
+    <select id="operation" name="operation">
+        <option value="+">Add (+)</option>
+        <option value="-">Subtract (-)</option>
+        <option value="*">Multiply (*)</option>
+        <option value="/">Divide (/)</option>
+    </select>
 
     <button type="submit">Calculate</button>
 </form>
 
+<!-- 계산 결과 출력 -->
+<div th:if="${result != null}">
+    <h2>결과: <span th:text="${result}"></span></h2>
+</div>
+
+<!-- 에러 메시지 출력 -->
+<div th:if="${errorMessage != null}">
+    <h2 style="color: red;">오류: <span th:text="${errorMessage}"></span></h2>
+</div>
+
 </body>
 </html>
+
