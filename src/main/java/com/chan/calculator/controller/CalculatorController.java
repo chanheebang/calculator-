@@ -22,7 +22,7 @@ public class CalculatorController {
         return "calculator";
     }
 
-    @PostMapping("/calculator")
+    @PostMapping("/calculate")
     public String calculate(
             @RequestParam("num1") double num1,
             @RequestParam("num2") double num2,

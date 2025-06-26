@@ -1,40 +1,110 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Awesome 계산기</title>
+    <title>Awesome한 계산기</title>
+    <style>
+        @font-face {
+            font-family: exqt;
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/exqt.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: exqt;
+            background-color: #f7ffcc; /* 연노랑 */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #db36a4;
+            text-align: center;
+        }
+
+        form {
+            background: #fff5fb;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: exqt;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-family: exqt;
+            background-color: #db36a4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .result, .error {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-family: exqt;
+        }
+
+        .result {
+            background-color: #e0f7e9;  /* 연한 민트 */
+            color: #2e7d55;             /* 딥그린 */
+        }
+
+        .error {
+            background-color: #fdecea;  /* 연한 살구색 */
+            color: #d93025;             /* 차분한 레드 */
+        }
+    </style>
 </head>
 <body>
-<h1>Awesome 계산기</h1>
+<h1>Awesome한 계산기</h1>
 
-<form th:action="@{/calculator}" method="post">
+<form th:action="@{/calculate}" method="post">
     <label for="num1">Number 1:</label>
     <input type="number" step="any" id="num1" name="num1" required/>
 
     <label for="num2">Number 2:</label>
     <input type="number" step="any" id="num2" name="num2" required/>
 
-    <label for="operation">Operation:</label>
+    <label for="operation">Operation: </label>
     <select id="operation" name="operation">
         <option value="+">Add (+)</option>
         <option value="-">Subtract (-)</option>
-        <option value="*">Multiply (*)</option>
-        <option value="/">Divide (/)</option>
+        <option value="*">Multiply (×)</option>
+        <option value="/">Divide (÷)</option>
     </select>
 
     <button type="submit">Calculate</button>
 </form>
 
-<!-- 계산 결과 출력 -->
-<div th:if="${result != null}">
-    <h2>결과: <span th:text="${result}"></span></h2>
+<div th:if="${errorMessage}" class="error">
+    <p th:text="${errorMessage}"></p>
 </div>
 
-<!-- 에러 메시지 출력 -->
-<div th:if="${errorMessage != null}">
-    <h2 style="color: red;">오류: <span th:text="${errorMessage}"></span></h2>
+<div th:if="${result}" class="result">
+    <h2>Result: <span th:text="${result}"></span></h2>
 </div>
-
 </body>
 </html>
 
